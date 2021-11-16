@@ -3,12 +3,12 @@ const router = Router();
 const mysqlConnection =require('../database');
 const movies=require('../sample.json');
 const _= require('underscore');
-
+var table='clientes';
 
 
 //busqueda total a la base de datos
 router.get('/',(req,res)=>{ 
-    mysqlConnection.query('SELECT * FROM usuarios', (err,rows,fields)=>{
+    mysqlConnection.query('SELECT * FROM '+table,(err,rows,fields)=>{
         if (!err) {
             res.json(rows);
         }else{
@@ -49,8 +49,7 @@ router.post('/',(req,res)=>{
         });
     } else{  
         res.status(500).json({error: 'hubo un error'});
-    }
-    
+    }   
 });
 
 router.put('/:id',(req,res)=>{    
